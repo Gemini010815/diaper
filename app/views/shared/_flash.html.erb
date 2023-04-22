@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "flash" do %>
+  <% flash.each do |key, message| %>
+    <div class="<%= flash_class(key) %> alert-dismissible" role="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>

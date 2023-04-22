@@ -1,0 +1,101 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <% content_for :title, "Requests - #{@request.id} - #{current_organization.name}" %>
+        <h1>
+          Request
+          <small>from <%= @request.partner.name %></small>
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><%= link_to(dashboard_path) do %>
+              <i class="fa fa-dashboard"></i> Home
+            <% end %>
+          </li>
+          <li class="breadcrumb-item"><%= link_to "Requests", (requests_path) %></li>
+          <li class="breadcrumb-item"><a href="#"> Request from <%= @request.partner.name %>
+            at <%= @request.created_at.to_fs(:distribution_date) %></a></li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">This request was sent on <%= @request.created_at.to_fs(:distribution_date) %></h3>
+          </div>
+          <div class="card-body p-0">
+            <table class="table">
+              <thead>
+                <tr>
+                <th>Request was sent by:</th>
+                <th>Request Sender:</th>
+                <th>Request Status:</th>
+                <th>Comments:</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td><%= @request.partner.name %></td>
+                <td><%= @request.partner_user.present? ? "#{@request.partner_user.name} <#{@request.partner_user.email}>" : "" %></td>
+                <td><%= render partial: "status", locals: {status: @request.status} %></td>
+                <td><%= @request.comments || 'None' %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body p-0">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Fulfillment Location Inventory</th>
+                <th>Total Inventory</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @request_items.each do |item| %>
+                <tr>
+                  <td><%= item.name %></td>
+                  <td><%= item.quantity %></td>
+                  <td><%= item.on_hand_for_location %></td>
+                  <td><%= item.on_hand %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <td>Total (Quota)</td>
+                <td>
+                  <%= @request.total_items %>
+                  <%= quota_display(@request.partner) %>
+                </td>
+                <td />
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer flex flex-row space-x-2">
+            <%= submit_button_to start_request_path(@request), {text: "Fulfill request", size: "md"} unless @request.distribution %>
+            <%= view_button_to(distribution_path(@request.distribution), {text: "View Associated Distribution", size: "md"}) if @request.distribution %>
+            <%= button_to 'Cancel', new_request_cancelation_path(organization: @organization, request_id: @request.id),
+                          method: :get, form_class: 'd-inline', class: 'btn btn-danger btn-md' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

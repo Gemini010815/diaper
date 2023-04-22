@@ -1,0 +1,30 @@
+<section class="container mx-auto my-5">
+  <h2 class="font-weight-bold">Request History</h2>
+
+  <table class="rounded-lg w-100 shadow-lg bg-white">
+    <thead>
+      <tr class="border-bottom border-dark">
+        <th scope="col" class="p-4 w-40">Request Date</th>
+        <th scope="col" class="p-4">Items Requested</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @partner_requests.each do |partner_request| %>
+        <tr class="border-bottom last:border-none">
+          <td class="p-4">
+            <i class="text-primary far fa-file-alt mr-1"></i>
+            <%= partner_request.created_at.strftime("%b %-d %Y") %>
+          </td>
+          <td class="p-4"><%= partner_request.id %></td>
+          <td class="p-4 d-flex flex-wrap">
+            <% partner_request.item_requests.map do |item| %>
+              <span class="p-1 mr-1 mb-2 lg:mb-0 border border-dark rounded-sm">
+                <%= item.quantity %> <%= item.name%>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

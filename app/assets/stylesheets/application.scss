@@ -1,0 +1,158 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require barcode_reader
+ */
+
+ //Use @import in order to process SCSS variables
+ // import reusable variables
+ @import 'colors';
+ @import 'base/_variables';
+ @import 'resources/*';
+
+ // import other stylesheets after variables
+@import 'AdminLTE';
+@import 'bootstrap';
+@import 'simple_form-bootstrap/simple_form-bootstrap';
+@import 'bootstrap-select';
+@import 'progress_stepper';
+@import 'audits';
+@import 'modal-dialog';
+@import 'custom';
+
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.thumbnail {
+  max-width: 80vw;
+}
+
+.main-header {
+  height: #{$diaper-navbar-height}px
+}
+
+.main-footer {
+  height: #{$diaper-footer-height}px
+}
+
+  // TODO: this should be added to a separate file
+.striped {
+  tbody{
+    tr:nth-child(odd) {background: $white}
+    tr:nth-child(even) {background: $light-grey}
+  }
+  thead {background: $light-grey}
+}
+
+.fade.in {
+  opacity: 1;
+}
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.modal-backdrop.in {
+  opacity: 0.5;
+}
+
+
+table .date {
+  text-align: center;
+}
+
+.line-item-separator {
+  color: gray;
+  height: 5px;
+  background-color: gray;
+}
+
+.main_logo {
+  max-width: 100%;
+}
+
+.btn-group-xs > .btn, .btn-xs {
+  padding: .25rem .4rem;
+  font-size: .875rem;
+  line-height: .5;
+  border-radius: .2rem;
+}
+span.help-block {
+  color: red;
+}
+
+tr.positive {
+  background-color: #95faab;
+}
+
+tr.negative {
+  background-color: #f2969f;
+}
+
+.fa-beat {
+  -webkit-animation: fa-beat 1s infinite linear;
+  animation: fa-beat 1s infinite linear;
+}
+@-webkit-keyframes fa-beat {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes fa-beat {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.failed-login-banner {
+  background-color: cornsilk;
+  text-align: center;
+  padding: 0.5rem 0 0.5rem;
+}
+
+body a {
+  color:#007bff;
+  text-decoration:none;
+  background-color:transparent
+}
+
+#copy-calendar-button {
+  margin-left: 10px;
+}
+
+select.selectpicker + .dropdown-toggle::after {
+  display: none;
+}

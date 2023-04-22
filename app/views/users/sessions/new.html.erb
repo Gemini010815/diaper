@@ -1,0 +1,39 @@
+<%= render partial: "shared/flash" %>
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <% if @failed_login %>
+         <p class="failed-login-banner">Invalid Credentials.</p>
+        <% end %>
+        <div class="form-inputs">
+          <%= f.input :email, autofocus: true %>
+        </div>
+        <div class="form-inputs">
+          <%= f.input :password, autofocus: true %>
+        </div>
+        <div class="col-12 text-center">
+          <%= f.button :submit, "Log in", class: "btn btn-primary btn-block" %>
+        </div>
+        <!-- /.col -->
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-9">
+          <p class="mb-1">
+            <%= render "users/shared/links" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+<% end %>
+
+<%= link_to user_google_oauth2_omniauth_authorize_path, method: :post do %>
+  <img src="../img/btn_google_signin_dark_focus_web@2x.png" alt="Sign in with Google"/>
+<% end %>

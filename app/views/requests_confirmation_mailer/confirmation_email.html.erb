@@ -1,0 +1,14 @@
+<p>Hello <%= @partner.name %>,</p>
+
+<p>This is an email confirmation that the <%= @organization.name %> has received your request of:</p>
+<ul>
+  <% @request_items.each do |item| %>
+    <li><%= item['name'] %> - <%= item['quantity'] || item['person_count'] %></li>
+  <% end %>
+</ul>
+
+<p>You will receive a notification when a distribution has been created of the pick-up time and date.</p>
+
+<p>Your friends at</p>
+<p><%= @organization.name %></p>
+<p>For more info, please e-mail <a href="mailto:<%= @organization.from_email %>"><%= @organization.from_email %></a></p>
